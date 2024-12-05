@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}User Settings{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="R:/PROJECTS/FINANCE TRACKER/static/style.css">
+
+<h2>User Settings</h2>
+
+<form method="POST" action="{{ url_for('settings') }}">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="{{ name }}" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="{{ email }}" required>
+    </div>
+    <button type="submit">Update Profile</button>
+</form>
+
+<a href="{{ url_for('change_password') }}">Change Password</a>
+{% endblock %}

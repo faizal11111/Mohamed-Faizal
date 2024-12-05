@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ name }}!</h2>
+<p>Add your transactions and manage your finances.</p>
+<link rel="stylesheet" href="R:/PROJECTS/FINANCE TRACKER/static/style.css">
+
+<!-- Add Transaction page -->
+<a href="{{ url_for('add_transaction') }}">Add a Transaction</a>
+
+<h3>Your Transactions:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.transaction_type }}</td>
+            <td>{{ transaction.date.strftime('%Y-%m-%d') }}</td>
+            <td>
+                <form action="{{ url_for('delete_transaction', transaction_id=transaction.id) }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+                                
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">No transactions available.</td>
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
